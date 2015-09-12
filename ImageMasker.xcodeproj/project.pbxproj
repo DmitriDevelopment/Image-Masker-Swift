@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C09A43F1BA420D900C98833 /* AutolayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09A43E1BA420D900C98833 /* AutolayoutViewController.swift */; };
 		2C9439031BA3C07B0088DF8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9439021BA3C07B0088DF8D /* AppDelegate.swift */; };
-		2C9439051BA3C07B0088DF8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9439041BA3C07B0088DF8D /* ViewController.swift */; };
+		2C9439051BA3C07B0088DF8D /* FrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9439041BA3C07B0088DF8D /* FrameViewController.swift */; };
 		2C9439081BA3C07B0088DF8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9439061BA3C07B0088DF8D /* Main.storyboard */; };
 		2C94390A1BA3C07B0088DF8D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C9439091BA3C07B0088DF8D /* Images.xcassets */; };
 		2C94390D1BA3C07B0088DF8D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C94390B1BA3C07B0088DF8D /* LaunchScreen.xib */; };
 		2C9439191BA3C07B0088DF8D /* ImageMaskerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9439181BA3C07B0088DF8D /* ImageMaskerTests.swift */; };
+		2C9439231BA3CC2A0088DF8D /* MaskerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9439221BA3CC2A0088DF8D /* MaskerView.swift */; };
+		2C9439271BA3D63E0088DF8D /* DebugFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9439261BA3D63E0088DF8D /* DebugFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,16 +29,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C09A43E1BA420D900C98833 /* AutolayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutolayoutViewController.swift; sourceTree = "<group>"; };
 		2C9438FD1BA3C07B0088DF8D /* ImageMasker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageMasker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C9439011BA3C07B0088DF8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C9439021BA3C07B0088DF8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C9439041BA3C07B0088DF8D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2C9439041BA3C07B0088DF8D /* FrameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameViewController.swift; sourceTree = "<group>"; };
 		2C9439071BA3C07B0088DF8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C9439091BA3C07B0088DF8D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2C94390C1BA3C07B0088DF8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		2C9439121BA3C07B0088DF8D /* ImageMaskerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageMaskerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C9439171BA3C07B0088DF8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C9439181BA3C07B0088DF8D /* ImageMaskerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMaskerTests.swift; sourceTree = "<group>"; };
+		2C9439221BA3CC2A0088DF8D /* MaskerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskerView.swift; sourceTree = "<group>"; };
+		2C9439261BA3D63E0088DF8D /* DebugFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebugFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +84,11 @@
 			isa = PBXGroup;
 			children = (
 				2C9439021BA3C07B0088DF8D /* AppDelegate.swift */,
-				2C9439041BA3C07B0088DF8D /* ViewController.swift */,
+				2C9439041BA3C07B0088DF8D /* FrameViewController.swift */,
+				2C09A43E1BA420D900C98833 /* AutolayoutViewController.swift */,
+				2C9439221BA3CC2A0088DF8D /* MaskerView.swift */,
 				2C9439061BA3C07B0088DF8D /* Main.storyboard */,
+				2C9439261BA3D63E0088DF8D /* DebugFunctions.swift */,
 				2C9439091BA3C07B0088DF8D /* Images.xcassets */,
 				2C94390B1BA3C07B0088DF8D /* LaunchScreen.xib */,
 				2C9439001BA3C07B0088DF8D /* Supporting Files */,
@@ -212,8 +221,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C9439051BA3C07B0088DF8D /* ViewController.swift in Sources */,
+				2C9439051BA3C07B0088DF8D /* FrameViewController.swift in Sources */,
 				2C9439031BA3C07B0088DF8D /* AppDelegate.swift in Sources */,
+				2C9439231BA3CC2A0088DF8D /* MaskerView.swift in Sources */,
+				2C9439271BA3D63E0088DF8D /* DebugFunctions.swift in Sources */,
+				2C09A43F1BA420D900C98833 /* AutolayoutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +354,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ImageMasker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -409,6 +422,7 @@
 				2C94391E1BA3C07B0088DF8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C94391F1BA3C07B0088DF8D /* Build configuration list for PBXNativeTarget "ImageMaskerTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +431,7 @@
 				2C9439211BA3C07B0088DF8D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

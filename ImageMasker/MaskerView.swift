@@ -5,17 +5,13 @@
 //  Created by Дмитрий Буканович on 12.09.15.
 //  Copyright (c) 2015 Дмитрий Буканович. All rights reserved.
 //
-
+import AVFoundation
 import UIKit
 
 enum MaskerType {
     case HorisontalShift, VerticalShift, Rotation
 }
 
-struct MaskSettings {
-    let type : MaskerType
-    let padding : CGFloat
-}
 
 class MaskerView: UIView {
 
@@ -24,48 +20,61 @@ class MaskerView: UIView {
     private var maskLayer : CALayer!
     private var contentLayer : CALayer!
     
-    // Mask Properties
-    
-    
-    private var contentAspectRatio : CGFloat  = 2
-    private var viewAspectRation : CGFloat = 1
     
     /**
-    Mask properties.Set to change behavior
-    
-    type : MaskerType
-    
-    * HorisontalShift - content shifting horizontally
-    * VerticalShift - content shifting vertically
-    * Rotation - content rotate around Z - axis
-    
-    padding : CGFloat
-    
-    Mask padding of Parent Layer's border
-
+    Custom BezierPath. If not nill then this path will be used in "key-hole drawing"
     */
-    var maskProperties : MaskSettings! {
+    var customKeyHolePath : ((frame : CGRect) -> UIBezierPath)!
+    
+    /**
+    Custom Transform. If not nill then this transform will be used in image moving under "key-hole"
+    */
+    var customImageTransform : ((viewBounds : CGRect, imageFrame : CGRect) -> CATransform3D)! {
         didSet {
-            self.type = maskProperties.type
-            self.maskPadding = maskProperties.padding
-            self.calculateContentAspectRatio()
-            self.setupMask()
-            self.setupSublayersLayout()
-
+            contentLayer.transform = self.customImageTransform(viewBounds: self.bounds,imageFrame : self.contentLayer.frame)
         }
     }
     
-    private var type : MaskerType = .HorisontalShift
-    private var maskPadding : CGFloat = 20
+    /**
+    This property automatically define type by size properties of View and Image 
+    
+    default = true
+    
+    :Rules:
+    
+    * contentAspectRatio >= 1 and contentAspectRatio > viewAspectRation => type = .HorisontalShift
+    
+    * contentAspectRatio < 1 and contentAspectRatio > viewAspectRation => type = .VerticalShift
+    
+    * contentAspectRatio > 1 and contentAspectRatio < viewAspectRation => type = .HorisontalShift
+    
+    * contentAspectRatio <= 1 and contentAspectRatio < viewAspectRation => type = .VerticalShift
+    
+    * contentAspectRatio == 1 and contentAspectRatio == viewAspectRation => type = .Rotation
+
+    */
+    var autoType : Bool = true
+    
+    
+    
+    /**
+    This property directionally defined type if autoType == false
+    default = .HorisontalShift
+    */
+    var type : MaskerType = .HorisontalShift
+    
+    /**
+    Property for padding from border of View to "key-hole"
+    default = 10
+    */
+    var maskPadding : CGFloat = 10
     
     /**
     Content image property
-    
     */
     var image : UIImage! {
         didSet {
             contentLayer.contents = image.CGImage
-            self.calculateContentAspectRatio()
             self.setupSublayersLayout()
         }
     }
@@ -89,7 +98,6 @@ class MaskerView: UIView {
         
         self.setupMaskLayer()
         self.setupContentLayer()
-        self.setupMask()
         
         maskLayer.addSublayer(contentLayer)
         
@@ -124,33 +132,38 @@ class MaskerView: UIView {
         
         maskLayer = CALayer()
         maskLayer.backgroundColor = UIColor.blackColor().CGColor
-
-        
-    }
-    
-    private func setupMask() {
         
         mask = CAShapeLayer(layer: layer)
         mask.frame = self.bounds
         
+        mask.fillColor = UIColor.blackColor().CGColor
+        maskLayer.mask = mask
+
+
+        
+    }
+    
+    
+    private func setPathToMask() {
+        
+        var newPath = UIBezierPath()
         switch self.type {
         case .HorisontalShift, .VerticalShift:
-            mask.path = UIBezierPath(rect: CGRectInset(self.bounds, maskPadding, maskPadding)).CGPath
+            newPath = UIBezierPath(rect: CGRectInset(self.bounds, maskPadding, maskPadding))
         case .Rotation:
-            let circlePath = UIBezierPath(arcCenter: mask.position,
-                radius: (mask.bounds.height / 2) - maskPadding,
+            let radius = frame.height < frame.width ? (frame.height / 2) : (frame.width / 2)
+            newPath = UIBezierPath(arcCenter: mask.position,
+                radius: radius - maskPadding,
                 startAngle: CGFloat(-M_PI),
                 endAngle: CGFloat(0),
                 clockwise: true)
-            circlePath.closePath()
+            newPath.closePath()
             
-            mask.path = circlePath.CGPath
+            
         }
-        
-        mask.fillColor = UIColor.blackColor().CGColor
-        maskLayer.mask = mask
-        
+        mask.path =  self.customKeyHolePath != nil ? self.customKeyHolePath(frame :self.bounds).CGPath : newPath.CGPath
     }
+    
     
     // Layouts
     
@@ -164,39 +177,61 @@ class MaskerView: UIView {
     
     private func setupSublayersLayout() {
         
-        viewAspectRation = (type == .HorisontalShift) ? bounds.height / bounds.width : bounds.width / bounds.height
+        let viewAspectRatio = bounds.width / bounds.height
+        var contentAspectRatio : CGFloat = 1.0
+        if let image = self.image {
+            contentAspectRatio = CGFloat(image.size.width / image.size.height)
+        }
+        
+        if autoType {
+            self.automaticDefineTypeBy(contentAspectRatio, and: viewAspectRatio)
+        }
+        
 
         var contentFrame = self.bounds
         switch self.type {
         case .HorisontalShift:
-            let deltaXValue = contentAspectRatio == 1 ? 0 : (-(contentFrame.width / 2) * (contentAspectRatio / 2) * viewAspectRation)
-            contentFrame = CGRectInset(contentFrame, deltaXValue, 0)
+
+            let frameWidth =  contentAspectRatio * (1 / viewAspectRatio) > 1 ? contentFrame.width * contentAspectRatio * (1 / viewAspectRatio) : contentFrame.width
+            contentFrame = CGRectMake(-(frameWidth - contentFrame.width) / 2, 0, frameWidth, contentFrame.height)
+
         case .VerticalShift:
-            let deltaYValue = contentAspectRatio == 1 ? 0 : (-(contentFrame.height / 2) * (contentAspectRatio / 2) * viewAspectRation)
-            contentFrame = CGRectInset(contentFrame, 0, deltaYValue)
+            let frameHeight =  (1 / contentAspectRatio) * viewAspectRatio > 1 ? contentFrame.height * (1 / contentAspectRatio) * viewAspectRatio : contentFrame.height
+            contentFrame = CGRectMake(0, -(frameHeight - contentFrame.height) / 2, contentFrame.width, frameHeight)
+            
         case .Rotation:
             break
         }
         
-        contentLayer.transform = CATransform3DIdentity
-        contentLayer.frame = contentFrame
-        maskLayer.frame = self.bounds
-        mask.frame = self.bounds
         
+        
+        contentLayer?.transform = CATransform3DIdentity
+        contentLayer?.frame = contentFrame
+        maskLayer?.frame = self.bounds
+        mask?.frame = self.bounds
+        
+        setPathToMask()
         
     }
     
-    private func calculateContentAspectRatio() {
-        if let image = self.image {
-            switch self.type {
-            case .HorisontalShift:
-                contentAspectRatio = (image.size.width / image.size.height > 1) ? image.size.width / image.size.height : 1
-            case .VerticalShift:
-                contentAspectRatio =  (image.size.height / image.size.width > 1) ? image.size.height / image.size.width : 1
-            case .Rotation:
-                break
-            }
+    private func automaticDefineTypeBy(contentAspectRatio : CGFloat, and viewAspectRatio : CGFloat) {
+        
+        if contentAspectRatio >= 1 && contentAspectRatio > viewAspectRatio {
+            self.type = .HorisontalShift
+        } else
+            if contentAspectRatio < 1 && contentAspectRatio > viewAspectRatio {
+                self.type = .VerticalShift
+            } else
+                if contentAspectRatio > 1 && contentAspectRatio < viewAspectRatio {
+                    self.type = .HorisontalShift
+                } else
+                    if contentAspectRatio <= 1 && contentAspectRatio < viewAspectRatio {
+                        self.type = .VerticalShift
+                    } else
+                        if contentAspectRatio == 1 && contentAspectRatio == viewAspectRatio {
+                            self.type = .Rotation
         }
+
         
     }
     
@@ -233,17 +268,15 @@ class MaskerView: UIView {
         
         switch self.type {
         case .HorisontalShift:
-            transformMatrix = CATransform3DMakeTranslation((self.bounds.size.width / 2) * (contentAspectRatio / 2) * offset * viewAspectRation, 0, 0)
-            transformMatrix = contentAspectRatio == 1 ? CATransform3DIdentity : transformMatrix
+            transformMatrix = CATransform3DMakeTranslation((self.contentLayer.frame.width - self.bounds.size.width) / 2 * offset, 0, 0)
         case .VerticalShift:
-            transformMatrix = CATransform3DMakeTranslation(0, (self.bounds.size.height / 2) * (contentAspectRatio / 2) * offset * viewAspectRation, 0)
-            transformMatrix = contentAspectRatio == 1 ? CATransform3DIdentity : transformMatrix
+            transformMatrix = CATransform3DMakeTranslation(0, ((self.contentLayer.frame.height - self.bounds.size.height) / 2) * offset, 0)
         case .Rotation:
             let angle = CGFloat(M_PI) * offset
             transformMatrix = CATransform3DMakeRotation(angle, 0, 0, 1)
         }
         
-        contentLayer.transform = transformMatrix
+        contentLayer.transform =  transformMatrix
     }
     
     

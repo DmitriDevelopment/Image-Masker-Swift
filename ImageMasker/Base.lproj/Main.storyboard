@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BXa-o2-8Vk">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Frames-->
@@ -16,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfB-dg-fdE">
-                                <rect key="frame" x="277" y="513" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfB-dg-fdE">
+                                <rect key="frame" x="538" y="513" width="46" height="30"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -27,6 +28,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="lfB-dg-fdE" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="N5L-th-6Fy"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="lfB-dg-fdE" secondAttribute="bottom" constant="8" id="edz-KK-7bD"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Frames" id="8PX-Eo-zT2"/>
                 </viewController>
@@ -47,12 +52,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CYN-ld-u6w" customClass="MaskerView" customModule="ImageMasker" customModuleProvider="target">
-                                <rect key="frame" x="5" y="16" width="200" height="200"/>
+                                <rect key="frame" x="5" y="16" width="300" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="n1l-Xs-xUU"/>
-                                    <constraint firstAttribute="height" constant="200" id="nc1-DT-bgS">
-                                        <variation key="heightClass=compact-widthClass=compact" constant="100"/>
+                                    <constraint firstAttribute="width" constant="300" id="n1l-Xs-xUU">
+                                        <variation key="heightClass=compact" constant="200"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="300" id="nc1-DT-bgS">
+                                        <variation key="heightClass=compact-widthClass=compact" constant="150"/>
+                                    </constraint>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eG-1c-yeg" customClass="MaskerView" customModule="ImageMasker" customModuleProvider="target">
+                                <rect key="frame" x="8" y="324" width="105" height="80"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="105" id="0zR-yE-yQ9">
+                                        <variation key="heightClass=compact" constant="80"/>
+                                    </constraint>
+                                    <constraint firstAttribute="height" constant="80" id="eWU-zB-lrs">
+                                        <variation key="heightClass=compact" constant="105"/>
                                     </constraint>
                                 </constraints>
                             </view>
@@ -61,10 +80,13 @@
                         <constraints>
                             <constraint firstItem="CYN-ld-u6w" firstAttribute="top" secondItem="u7Y-Eg-EHV" secondAttribute="top" constant="16" id="NhR-yC-BuD"/>
                             <constraint firstItem="CYN-ld-u6w" firstAttribute="leading" secondItem="u7Y-Eg-EHV" secondAttribute="leading" constant="5" id="d2V-iY-y4d"/>
+                            <constraint firstItem="7eG-1c-yeg" firstAttribute="top" secondItem="CYN-ld-u6w" secondAttribute="bottom" constant="8" id="gFi-Oj-hOd"/>
+                            <constraint firstItem="7eG-1c-yeg" firstAttribute="leading" secondItem="u7Y-Eg-EHV" secondAttribute="leading" constant="8" id="nHa-8R-Ra3"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Autolayout" id="0a7-nE-NbZ"/>
                     <connections>
+                        <outlet property="changedMaskView" destination="7eG-1c-yeg" id="iep-y6-U02"/>
                         <outlet property="horizontalMaskView" destination="CYN-ld-u6w" id="vft-yf-OmG"/>
                     </connections>
                 </viewController>

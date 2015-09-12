@@ -22,33 +22,35 @@ class FrameViewController: UIViewController {
         let imageRotate = UIImage(named: "eathinfire")
 
         rotationMasker = MaskerView(frame: CGRectMake(self.view.bounds.width / 2, 20, self.view.bounds.width / 2, self.view.bounds.width / 2))
+        // This property for direct set type of motion, else type defines automatically
+//        rotationMasker.type = MaskerType.Rotation
+//        rotationMasker.autoType = false
+        // Property for padding from border of View to "key-hole"
+        rotationMasker.maskPadding = 3.0
+        
+        // Image content
         rotationMasker.image = imageRotate
-        let rotationSettings = MaskSettings(type : MaskerType.Rotation, padding : 1)
-        rotationMasker.maskProperties = rotationSettings
+        
         view.addSubview(rotationMasker)
     
         
         let imageHorizontalShift = UIImage(named: "ocean")
         
-        horizontalMasker = MaskerView(frame: CGRectMake(self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2))
+        horizontalMasker = MaskerView(frame: CGRectMake(self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 4))
         horizontalMasker.image = imageHorizontalShift
-        let horizontalSettings = MaskSettings(type : MaskerType.HorisontalShift, padding : 1)
-        horizontalMasker.maskProperties = horizontalSettings
+        horizontalMasker.maskPadding = 20
         view.addSubview(horizontalMasker)
         
         let imageVerticalShift = UIImage(named: "bottle")
         
         verticalMasker = MaskerView(frame: CGRectMake(0, 20, self.view.bounds.width / 2, self.view.bounds.width / 2))
         verticalMasker.image = imageVerticalShift
-        let verticalSettings = MaskSettings(type : MaskerType.VerticalShift, padding : 1)
-        verticalMasker.maskProperties = verticalSettings
         view.addSubview(verticalMasker)
         
         let image4VerticalShift = UIImage(named: "bottle4")
         
         vertical4Masker = MaskerView(frame: CGRectMake(0, self.view.bounds.width / 2 + 20, self.view.bounds.width / 2, self.view.bounds.width / 2 * 1.5))
         vertical4Masker.image = image4VerticalShift
-        vertical4Masker.maskProperties = verticalSettings
         view.addSubview(vertical4Masker)
 
 
@@ -86,7 +88,7 @@ class FrameViewController: UIViewController {
     }
     @IBAction func tap(sender: AnyObject) {
         
-        horizontalMasker.frame = CGRectMake(self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 4)
+        horizontalMasker.frame = CGRectMake(self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2)
         
     }
     

@@ -94,7 +94,6 @@ class MaskerView: UIView {
     
     private func setupLayers() {
         self.clipsToBounds = true
-        backgroundColor = UIColor.blueColor()
         
         self.setupMaskLayer()
         self.setupContentLayer()
@@ -105,14 +104,6 @@ class MaskerView: UIView {
         
         
     }
-    
-    override func didMoveToSuperview() {
-        super.didMoveToSuperview()
-        if let backgroundColor = self.superview?.backgroundColor {
-            self.backgroundColor = backgroundColor
-        }
-    }
-    
     
     
     // Layer setup
@@ -151,7 +142,7 @@ class MaskerView: UIView {
         case .HorisontalShift, .VerticalShift:
             newPath = UIBezierPath(rect: CGRectInset(self.bounds, maskPadding, maskPadding))
         case .Rotation:
-            let radius = frame.height < frame.width ? (frame.height / 2) : (frame.width / 2)
+            let radius = min(frame.height, frame.width) / 2
             newPath = UIBezierPath(arcCenter: mask.position,
                 radius: radius - maskPadding,
                 startAngle: CGFloat(-M_PI),

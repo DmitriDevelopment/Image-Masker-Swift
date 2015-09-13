@@ -21,7 +21,7 @@ class AutolayoutViewController: UIViewController {
         horizontalMaskView.image = imageHorizontalShift
         
         let imageRotate = UIImage(named: "eathinfire")
-        changedMaskView.backgroundColor = view.backgroundColor
+        changedMaskView.backgroundColor = UIColor.blueColor()
         changedMaskView.maskPadding = 1
         changedMaskView.image = imageRotate
         

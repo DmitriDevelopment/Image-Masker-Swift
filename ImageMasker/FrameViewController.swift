@@ -45,6 +45,7 @@ class FrameViewController: UIViewController {
         
         verticalMasker = MaskerView(frame: CGRectMake(0, 20, self.view.bounds.width / 2, self.view.bounds.width / 2))
         verticalMasker.image = imageVerticalShift
+        verticalMasker.backgroundColor = view.backgroundColor
         view.addSubview(verticalMasker)
         
         let image4VerticalShift = UIImage(named: "bottle4")

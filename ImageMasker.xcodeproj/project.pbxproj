@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C09A43F1BA420D900C98833 /* AutolayoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C09A43E1BA420D900C98833 /* AutolayoutViewController.swift */; };
+		2C686F381BA551DF00D15733 /* DifSizesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C686F371BA551DF00D15733 /* DifSizesViewController.swift */; };
 		2C9439031BA3C07B0088DF8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9439021BA3C07B0088DF8D /* AppDelegate.swift */; };
 		2C9439051BA3C07B0088DF8D /* FrameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9439041BA3C07B0088DF8D /* FrameViewController.swift */; };
 		2C9439081BA3C07B0088DF8D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9439061BA3C07B0088DF8D /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		2C09A43E1BA420D900C98833 /* AutolayoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutolayoutViewController.swift; sourceTree = "<group>"; };
+		2C686F371BA551DF00D15733 /* DifSizesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifSizesViewController.swift; sourceTree = "<group>"; };
 		2C9438FD1BA3C07B0088DF8D /* ImageMasker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageMasker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C9439011BA3C07B0088DF8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C9439021BA3C07B0088DF8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				2C9439021BA3C07B0088DF8D /* AppDelegate.swift */,
 				2C9439041BA3C07B0088DF8D /* FrameViewController.swift */,
 				2C09A43E1BA420D900C98833 /* AutolayoutViewController.swift */,
+				2C686F371BA551DF00D15733 /* DifSizesViewController.swift */,
 				2C9439221BA3CC2A0088DF8D /* MaskerView.swift */,
 				2C9439061BA3C07B0088DF8D /* Main.storyboard */,
 				2C9439261BA3D63E0088DF8D /* DebugFunctions.swift */,
@@ -222,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C9439051BA3C07B0088DF8D /* FrameViewController.swift in Sources */,
+				2C686F381BA551DF00D15733 /* DifSizesViewController.swift in Sources */,
 				2C9439031BA3C07B0088DF8D /* AppDelegate.swift in Sources */,
 				2C9439231BA3CC2A0088DF8D /* MaskerView.swift in Sources */,
 				2C9439271BA3D63E0088DF8D /* DebugFunctions.swift in Sources */,

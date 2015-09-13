@@ -94,6 +94,88 @@
             </objects>
             <point key="canvasLocation" x="683" y="1426"/>
         </scene>
+        <!--Different Sizes-->
+        <scene sceneID="LUa-HL-c2i">
+            <objects>
+                <viewController id="3HT-iL-4gJ" customClass="DifSizesViewController" customModule="ImageMasker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="z1Y-K5-Vr8"/>
+                        <viewControllerLayoutGuide type="bottom" id="YdS-yM-qdX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0UO-eY-6wR">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v2x-Ad-Pvo" customClass="MaskerView" customModule="ImageMasker" customModuleProvider="target">
+                                <rect key="frame" x="200" y="200" width="200" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="KrE-Uu-2wZ"/>
+                                    <constraint firstAttribute="height" constant="200" id="YiK-PO-6gG"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z48-eP-zge">
+                                <rect key="frame" x="16" y="513" width="103" height="30"/>
+                                <state key="normal" title="Width &gt; Height">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="widthBiggerAction:" destination="3HT-iL-4gJ" eventType="touchUpInside" id="hHX-F9-nKQ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmo-rj-CsP">
+                                <rect key="frame" x="481" y="513" width="103" height="30"/>
+                                <state key="normal" title="Width &lt; Height">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="heightBiggerAction:" destination="3HT-iL-4gJ" eventType="touchUpInside" id="uBw-KF-nTP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1M-D8-Gim">
+                                <rect key="frame" x="249" y="513" width="103" height="30"/>
+                                <state key="normal" title="Width = Height">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="equalAction:" destination="3HT-iL-4gJ" eventType="touchUpInside" id="MNd-Hy-KLI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yy-wf-We5">
+                                <rect key="frame" x="250" y="20" width="100" height="30"/>
+                                <state key="normal" title="Change image">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeImageAction:" destination="3HT-iL-4gJ" eventType="touchUpInside" id="G5n-NS-RWh"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YdS-yM-qdX" firstAttribute="top" secondItem="J1M-D8-Gim" secondAttribute="bottom" constant="8" id="0cI-Oa-CCd"/>
+                            <constraint firstItem="YdS-yM-qdX" firstAttribute="top" secondItem="dmo-rj-CsP" secondAttribute="bottom" constant="8" id="3Fd-gE-8UM"/>
+                            <constraint firstItem="6yy-wf-We5" firstAttribute="top" secondItem="z1Y-K5-Vr8" secondAttribute="bottom" id="7Nm-sx-FYI"/>
+                            <constraint firstAttribute="centerX" secondItem="J1M-D8-Gim" secondAttribute="centerX" id="8dA-zL-EfW"/>
+                            <constraint firstItem="YdS-yM-qdX" firstAttribute="top" secondItem="Z48-eP-zge" secondAttribute="bottom" constant="8" id="Dbz-3I-mAj"/>
+                            <constraint firstAttribute="centerX" secondItem="6yy-wf-We5" secondAttribute="centerX" id="DhJ-Ca-xiu"/>
+                            <constraint firstItem="Z48-eP-zge" firstAttribute="leading" secondItem="0UO-eY-6wR" secondAttribute="leading" constant="16" id="HSn-tI-jWX"/>
+                            <constraint firstAttribute="centerX" secondItem="v2x-Ad-Pvo" secondAttribute="centerX" id="NZ8-b7-rFJ"/>
+                            <constraint firstItem="dmo-rj-CsP" firstAttribute="trailing" secondItem="0UO-eY-6wR" secondAttribute="trailingMargin" id="d4E-qp-NXD"/>
+                            <constraint firstAttribute="centerY" secondItem="v2x-Ad-Pvo" secondAttribute="centerY" id="pmq-LQ-Pi1"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Different Sizes" id="VLu-ET-sqF"/>
+                    <connections>
+                        <outlet property="maskerHeightConstraint" destination="YiK-PO-6gG" id="3Mb-mc-oSE"/>
+                        <outlet property="maskerWidthConstraint" destination="KrE-Uu-2wZ" id="1y6-QH-sJI"/>
+                        <outlet property="testMaskerView" destination="v2x-Ad-Pvo" id="Mym-dd-8WC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xx8-VN-tqm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1495" y="1426"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="nvW-Sd-a6c">
             <objects>
@@ -107,6 +189,7 @@
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="viewControllers" id="qX0-mx-3nm"/>
                         <segue destination="gi3-Da-xNr" kind="relationship" relationship="viewControllers" id="CKw-Tq-YQ3"/>
+                        <segue destination="3HT-iL-4gJ" kind="relationship" relationship="viewControllers" id="Grz-aV-iqf"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icp-Dv-aZo" userLabel="First Responder" sceneMemberID="firstResponder"/>

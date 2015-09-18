@@ -67,7 +67,12 @@ class MaskerView: UIView {
     Property for padding from border of View to "key-hole"
     default = 10
     */
-    var maskPadding : CGFloat = 10
+    var maskPadding : CGFloat = 10 {
+        didSet {
+            self.setupSublayersLayout()
+
+        }
+    }
     
     /**
     Content image property

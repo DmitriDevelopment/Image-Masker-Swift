@@ -9,6 +9,7 @@
 import UIKit
 
 class FrameViewController: UIViewController {
+    @IBOutlet weak var paddingLabel: UILabel!
     
     var rotationMasker : MaskerView!
     var horizontalMasker : MaskerView!
@@ -36,22 +37,21 @@ class FrameViewController: UIViewController {
         
         let imageHorizontalShift = UIImage(named: "ocean")
         
-        horizontalMasker = MaskerView(frame: CGRectMake(self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 4))
+        horizontalMasker = MaskerView(frame: CGRectMake(self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2, self.view.bounds.width / 2))
         horizontalMasker.image = imageHorizontalShift
-        horizontalMasker.maskPadding = 20
         view.addSubview(horizontalMasker)
         
         let imageVerticalShift = UIImage(named: "bottle")
         
         verticalMasker = MaskerView(frame: CGRectMake(0, 20, self.view.bounds.width / 2, self.view.bounds.width / 2))
         verticalMasker.image = imageVerticalShift
-        verticalMasker.backgroundColor = view.backgroundColor
         view.addSubview(verticalMasker)
         
         let image4VerticalShift = UIImage(named: "bottle4")
         
         vertical4Masker = MaskerView(frame: CGRectMake(0, self.view.bounds.width / 2 + 20, self.view.bounds.width / 2, self.view.bounds.width / 2 * 1.5))
         vertical4Masker.image = image4VerticalShift
+        vertical4Masker.backgroundColor = UIColor.orangeColor()
         view.addSubview(vertical4Masker)
 
 
@@ -93,6 +93,18 @@ class FrameViewController: UIViewController {
         
     }
     
+    @IBAction func paddingSteperAction(sender: AnyObject) {
+        
+        let newValue = (sender as! UIStepper).value
+        horizontalMasker.maskPadding = CGFloat(newValue)
+        verticalMasker.maskPadding =  CGFloat(newValue)
+        vertical4Masker.maskPadding = CGFloat(newValue)
+        rotationMasker.maskPadding = CGFloat(newValue)
+        
+        
+        paddingLabel.text = "Padding : \(Int(newValue))"
+        
+    }
 }
 
 
